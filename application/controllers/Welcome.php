@@ -20,7 +20,13 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('template/header');
+		$crud = new Grocery_CRUD();
+		$crud->set_theme('flexigrid');  /*memilih theme UI yang ingin digunakan*/
+		$crud->set_table('sipd_users');
+		$crud->columns('email','username','firs_name','last_name','company','phone');
+		$crud->set_subject('Users');
+		$output = $crud->render();
+		$this->load->view('template/header',$output);
 		$this->load->view('template/sidebar');
 		$this->load->view('admin/dashboard');
 		$this->load->view('template/footer');

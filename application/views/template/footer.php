@@ -212,5 +212,6 @@
     <script src="<?php echo base_url('assets/dist/js/demo.js');?>"></script>
     <!-- ColorBox -->
     <script src="<?php echo base_url(); ?>asset/plugins/colorbox/jquery.colorbox.js"></script>
+    
   </body>
 </html>

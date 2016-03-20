@@ -10,11 +10,44 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	    public function __construct()
 	    {
 	        parent::__construct();	
-	        $this->load->library('pagination');        	       
+	        $this->load->library(array('pagination','Grocery_crud'));        	       
 	        $this->load->model('m_user');
 	    }
 	    	    
-	    public function index()
+	    public function index() {
+			/**
+			* @return function for index with grocery crud
+			* @since 2016-03-20
+			* @see SIPD V.1.0
+			*/
+			try {
+				$this->config->set_item('grocery_crud_dialog_forms',true);
+				$this->config->set_item('grocery_crud_default_per_page',10);
+				
+				$crud = new Grocery_CRUD();
+				$crud->set_theme('flexigrid');  /*memilih theme UI yang ingin digunakan*/
+				$crud->set_table('sipd_users');
+				$crud->columns('email','username','first_name','last_name','company','phone');
+				$crud->add_fields('ip_address','email','username','password','salt','first_name','last_name','company','phone');
+				$crud->edit_fields('email','username','password','salt','first_name','last_name','company','phone');
+				$crud->set_subject('Users');
+				
+				$output = $crud->render();
+				
+				$this->load->view('template/header',$output);
+		        $this->load->view('template/sidebar');         
+		        $this->load->view('admin/user/list',$output);         
+		        $this->load->view('template/footer'); 
+			} catch(Exception $e) {
+				 /*penanganan bila ada error*/ 
+				$this->grocery_exceptions->show_error($e->getMessage(), $e->getTraceAsString());
+			}
+			  
+			//$this->load->view('',$output);
+		}
+				
+		
+	    public function index2()
 	    {	
 	    	$limit=$this->config->item('limit_data');
 	    	//pagination settings

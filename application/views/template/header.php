@@ -31,6 +31,13 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css');
     ?>">
     <link rel="stylesheet" href="<?php echo base_url('asset/plugins/colorbox/colorbox.css'); ?>" />
+    <!-- grocery crud -->
+    <?php foreach($css_files as $file): ?>
+		<link type="text/css" rel="stylesheet" href="<?php echo $file; ?>" />
+	<?php endforeach; ?>	
+    <?php foreach($js_files as $file): ?>
+		<script src="<?php echo $file; ?>"></script>
+	<?php endforeach; ?>
 	<script>
 	  $(document).ready(function(){
 		  //Examples of how to assign the ColorBox event to elements
