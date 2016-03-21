@@ -81,7 +81,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="#"><i class="fa fa-caret-right"></i> Wilayah</a></li>
-                <li><a href="#"><i class="fa fa-caret-right"></i> Jenis Usaha</a></li>
+                <li><a href="<?php echo base_url(); ?>mjenisusaha/"><i class="fa fa-caret-right"></i> Jenis Usaha</a></li>
                 <li><a href="#"><i class="fa fa-caret-right"></i> Wajib Pajak</a></li>
                 <li><a href="#"><i class="fa fa-caret-right"></i> Non Aktif WP</a></li>
                 <li><a href="#"><i class="fa fa-caret-right"></i> Rekening</a></li>

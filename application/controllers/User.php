@@ -31,9 +31,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				$crud->add_fields('ip_address','email','username','password','salt','first_name','last_name','company','phone');
 				$crud->edit_fields('email','username','password','salt','first_name','last_name','company','phone');
 				$crud->set_subject('Users');
-				
+				$crud->set_crud_url_path(site_url(strtolower(__CLASS__."/".__FUNCTION__)),site_url(strtolower(__CLASS__."/")));
+				//$crud->set_crud_url_path(site_url('user/index/'));
 				$output = $crud->render();
-				
+								 
 				$this->load->view('template/header',$output);
 		        $this->load->view('template/sidebar');         
 		        $this->load->view('admin/user/list',$output);         
@@ -45,8 +46,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			  
 			//$this->load->view('',$output);
 		}
-				
-		
+			
+						
+		 
 	    public function index2()
 	    {	
 	    	$limit=$this->config->item('limit_data');
