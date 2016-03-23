@@ -14,7 +14,7 @@ class Mjenisusaha extends CI_Controller
 
     public function index()
     {
-    	/*
+    	
         $q = urldecode($this->input->get('q', TRUE));
         $start = intval($this->input->get('start'));
         
@@ -41,37 +41,14 @@ class Mjenisusaha extends CI_Controller
             'total_rows' => $config['total_rows'],
             'start' => $start,
         );
-        */
-        try {
-			$this->config->set_item('grocery_crud_dialog_forms',true);
-			$this->config->set_item('grocery_crud_default_per_page',10);
-			
-			$crud = new Grocery_CRUD();
-			
-			$crud->set_theme('flexigrid');  /*memilih theme UI yang ingin digunakan*/
-			
-			$crud->set_table('sipd_mjenisusaha');
-			$crud->columns('JUsahaID','Description');
-			$crud->display_as('Usaha ID','Description');
-			$crud->add_fields('JUsahaID','Description');
-			$crud->edit_fields('JUsahaID','Description');
-			$crud->set_subject('Jenis Usaha');
-			$crud->order_by('JUsahaID','desc');
-			
-			$crud->set_crud_url_path(site_url(strtolower(__CLASS__."/".__FUNCTION__)),site_url(strtolower(__CLASS__."/")));
-			//$crud->set_crud_url_path(site_url('user/index/'));
-			$output = $crud->render();
-			
-	        $this->load->view('template/header',$output);
-	        //$this->load->view('template/header');
+        
+        
+	        //$this->load->view('template/header',$output);
+	        $this->load->view('template/header');
 	        $this->load->view('template/sidebar');         
 	        //$this->load->view('admin/user/list',$output);         
-	        $this->load->view('admin/jenis_usaha/mjenisusaha_list', $output);
-	        $this->load->view('template/footer');	
-		} catch(Exception $e) {
-			 /*penanganan bila ada error*/ 
-			$this->grocery_exceptions->show_error($e->getMessage(), $e->getTraceAsString());
-		}
+	        $this->load->view('admin/jenis_usaha/mjenisusaha_list', $data);
+	        $this->load->view('template/footer');			
     }
 
     public function read($id) 
@@ -97,7 +74,10 @@ class Mjenisusaha extends CI_Controller
 	    'JUsahaID' => set_value('JUsahaID'),
 	    'Description' => set_value('Description'),
 	);
-        $this->load->view('mjenisusaha_form', $data);
+		$this->load->view('template/header');
+	    $this->load->view('template/sidebar');         
+	    $this->load->view('admin/jenis_usaha/mjenisusaha_form', $data);
+	    $this->load->view('template/footer');        
     }
     
     public function create_action() 
@@ -128,7 +108,10 @@ class Mjenisusaha extends CI_Controller
 		'JUsahaID' => set_value('JUsahaID', $row->JUsahaID),
 		'Description' => set_value('Description', $row->Description),
 	    );
-            $this->load->view('mjenisusaha_form', $data);
+		    $this->load->view('template/header');
+		    $this->load->view('template/sidebar');         
+		    $this->load->view('admin/jenis_usaha/mjenisusaha_form', $data);
+		    $this->load->view('template/footer');              
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('mjenisusaha'));
